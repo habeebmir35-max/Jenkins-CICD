@@ -10,7 +10,7 @@
  */
 
 pipeline {
-    agent none  // Multi-agent setup - specify per stage
+    agent any  // Multi-agent setup - specify per stage
     
     environment {
         // Docker Hub credentials (configure in Jenkins Credentials)
@@ -175,9 +175,6 @@ pipeline {
         
         stage('Push to Registry') {
             agent any
-            when {
-                branch 'main'
-            }
             steps {
                 echo '📤 Pushing Docker image to registry...'
                 script {
@@ -191,9 +188,6 @@ pipeline {
         
         stage('Deploy') {
             agent any
-            when {
-                branch 'main'
-            }
             steps {
                 echo '🚀 Deploying backend application...'
                 script {
